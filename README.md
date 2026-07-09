@@ -89,16 +89,14 @@ rag-agent-showcase/
 
 ## 评估结果
 
-20 QA 规模, baseline(朴素 RAG) vs HyDE, Ragas 四指标:
+双场景 20 QA 验证 HyDE 适用性(Ragas 四指标, 详见 [docs/evaluation-report.md](docs/evaluation-report.md)):
 
-| 指标 | baseline | hyde | delta |
+| 场景 | context_precision Δ | context_recall Δ | 结论 |
 |---|---|---|---|
-| faithfulness | 0.824 | 0.833 | +0.009 |
-| answer_relevancy | 0.921 | 0.919 | -0.002 |
-| context_precision | 0.833 | 0.800 | -0.033 |
-| context_recall | 0.972 | 0.971 | -0.002 |
+| 论文式 QA(query≈document) | -0.033 | -0.002 | HyDE 无增益(场景不匹配) |
+| 口语化 QA(query≠document) | **+0.026** | **+0.025** | HyDE 检索正向(适用此场景) |
 
-**结论: 本场景下 HyDE 无显著提升。** 原因: QA 从 chunks 合成, query ≈ document, HyDE 的"对齐 query-document 语义"优势无发挥空间(context_recall 两版均 0.97)。这反而是个诚实的工程结论--进阶检索不是万能的, 要看场景匹配。详见 [docs/evaluation-report.md](docs/evaluation-report.md)。
+**结论: HyDE 的价值取决于 query-document 表达差异**——口语化提问时检索精度/召回提升, 论文式提问时无用武之地。这验证了"进阶检索要看场景匹配", 而非"HyDE 万能"。
 
 ## 已知局限
 
