@@ -1,102 +1,102 @@
 [
   {
-    "question": "根据文档内容，Nicholas Ray 和 Elia Kazan 共同拥有的职业有哪些？",
-    "ground_truth": "director, screenwriter, actor",
+    "question": "尼古拉斯·雷和伊利亚·卡赞都是干啥的？有啥一样的？",
+    "ground_truth": "他们共同的身份是导演、编剧和演员。",
     "source": "ReAct"
   },
   {
-    "question": "在文档中提到的知识密集型推理任务中，ReAct通过交互使用哪种API来检索信息以支持推理，并展示了推理与行动的协同作用？",
-    "ground_truth": "ReAct通过交互使用Wikipedia API来检索信息以支持推理，同时利用推理来指导下一步需要检索的内容，从而展示了推理与行动的协同作用。",
+    "question": "这玩意儿能让人一边看它怎么想一边改它的行为吗？",
+    "ground_truth": "是的，人类可以通过思维编辑（thought editing）在过程中控制或纠正智能体的行为。",
     "source": "ReAct"
   },
   {
-    "question": "在将纯文本数据集转换为增强有API调用的数据集C*时，具体包含哪三个步骤？请简要描述每个步骤的作用。",
-    "ground_truth": "三个步骤依次为：首先，利用模型M的上下文学习能力采样大量潜在的API调用；然后，执行这些API调用；最后，检查获得的响应是否有助于预测未来的token，并将其作为过滤标准。过滤后，合并不同工具的API调用，得到增强数据集C*，并用于微调。",
+    "question": "你们是怎么把那些API调用加到文本里的？",
+    "ground_truth": "先把普通文本数据集转换成带API调用的数据集，分三步：先用模型采样大量可能的API调用，然后执行这些调用，最后检查返回结果是否有助于预测后面的词，有用的就保留，最后合并不同工具的API调用。",
     "source": "Toolformer"
   },
   {
-    "question": "根据文档内容，Reflexion Actor 的生成内容应遵循哪种形式？请列出其包含的五个部分。",
-    "ground_truth": "Reflexion Actor 的生成内容应遵循以下形式：  \n1. Instruction  \n2. Function implementation  \n3. Unit test feedback  \n4. Self-reflection  \n5. Instruction for next function implementation",
+    "question": "那个AI写代码的反思模式是啥样的流程啊？",
+    "ground_truth": "Reflexion Actor的生成遵循以下形式：指令、函数实现、单元测试反馈、自我反思、下一个函数的实现指令。",
     "source": "Reflexion"
   },
   {
-    "question": "根据文档内容，作者提出的“言语强化学习”（verbal reinforcement learning）主要旨在解决传统强化学习中的哪两个具体挑战？",
-    "ground_truth": "主要解决传统强化学习中“黑箱策略”（black-box policy）和“优化设置”（optimization setups）带来的可解释性（interpretability）和对齐（alignment）难题。",
+    "question": "AI越来越自动了，会不会出啥安全问题啊？",
+    "ground_truth": "自动化提高了效率，但也放大了被滥用的风险，未来需要更多在安全和伦理方面的研究。",
     "source": "Reflexion"
   },
   {
-    "question": "在文档中，用户从哪个物体上取走了 lettuce 1？",
-    "ground_truth": "用户从 diningtable 1 上取走了 lettuce 1。",
+    "question": "生菜在哪儿啊？",
+    "ground_truth": "在 diningtable 1 上。",
     "source": "ReAct"
   },
   {
-    "question": "根据文档内容，Arthur’s Magazine 和 First for Women 哪个创刊更早？",
-    "ground_truth": "Arthur’s Magazine 创刊更早，它于1844年创刊，而 First for Women 于1989年创刊。",
+    "question": "哪本杂志创刊更早，Arthur’s Magazine 还是 First for Women？",
+    "ground_truth": "Arthur’s Magazine（1844-1846年）创刊更早，First for Women 是1989年创刊的。",
     "source": "ReAct"
   },
   {
-    "question": "根据文档中的`complete_sequence`函数，输入字符串`\"([[[{}]]{<[<[{}]>]>}\"`的返回值是什么？",
-    "ground_truth": "])",
+    "question": "这个代码是干嘛用的？",
+    "ground_truth": "这个函数用来补全括号序列，确保所有括号都正确闭合。",
     "source": "Voyager"
   },
   {
-    "question": "根据文档内容，HotpotQA数据集中关于“Cirque du Soleil show”所在酒店的房间数量问题，原始标签与实际答案有何不同？哪种方法能够获得最新答案？",
-    "ground_truth": "原始标签显示酒店有15,017个房间，但实际最新数据是15,117个房间。只有ReAct方法能够通过真实的网络交互和推理获得更新后的答案。",
+    "question": "那个太阳马戏团表演所在的酒店到底有多少个房间？",
+    "ground_truth": "根据文档中的图4，这个问题对应的原始标签已经过时，只有ReAct通过真实网络交互和推理才能获得最新答案。",
     "source": "ReAct"
   },
   {
-    "question": "在Mini Crosswords中，Thought Proposals（思维提议）是如何被提出并聚合的？请描述其使用的数据结构及具体流程。",
-    "ground_truth": "在Mini Crosswords中，Thought Proposals通过一个优先级队列（priority queue）进行聚合。具体流程是：每个线索（clue）对应一个State Evaluator（状态评估器），评估器会生成多个Thought Proposals，这些提议被放入优先级队列中，队列根据某种优先级顺序（如评估分数）对提议进行排序和聚合，以便后续处理。",
+    "question": "怎么让AI回答问题更靠谱，是让它多想想再回答，还是直接上网查资料？",
+    "ground_truth": "根据文档，ReAct的解题过程更基于事实和实际依据，而CoT则更容易产生幻觉。",
+    "source": "ReAct"
+  },
+  {
+    "question": "那个PaLM模型在HotpotQA上表现咋样啊？",
+    "ground_truth": "根据表格，PaLM-540B在HotpotQA上的标准提示方法（Standard）的精确匹配（EM）是28.7，而ReAct→CoT-SC方法达到了35.1。",
+    "source": "ReAct"
+  },
+  {
+    "question": "怎么把钥匙链放进保险柜里？",
+    "ground_truth": "你的任务是：把两个钥匙链放进保险柜。",
+    "source": "ReAct"
+  },
+  {
+    "question": "那个最难的问题集上，你们的方法到底表现咋样？",
+    "ground_truth": "在HumanEval Rust的50个最难问题上，使用GPT-4作为基础模型的Reflexion方法达到了68%的Pass@1准确率。",
+    "source": "Reflexion"
+  },
+  {
+    "question": "怎么让大模型一步步思考问题？",
+    "ground_truth": "通过“思维链提示”（Chain of thought prompting）可以激发大语言模型进行推理。",
+    "source": "Reflexion"
+  },
+  {
+    "question": "这个系统能怎么查资料？",
+    "ground_truth": "系统提供了三种操作：搜索实体（返回维基百科页面前5句话）、查找字符串（模拟浏览器Ctrl+F功能）、完成回答（结束任务并给出答案）。",
+    "source": "ReAct"
+  },
+  {
+    "question": "这个模型在游戏和考试里表现咋样？",
+    "ground_truth": "在AlfWorld任务中提升了22%，在HotPotQA中提升了20%，在HumanEval中提升了11%。",
+    "source": "Reflexion"
+  },
+  {
+    "question": "这个代码是干嘛用的？",
+    "ground_truth": "这个函数用来补全括号序列，确保所有括号都正确闭合。",
+    "source": "Voyager"
+  },
+  {
+    "question": "这个研究为啥要用填字游戏来测试AI啊？",
+    "ground_truth": "目的是探索语言模型作为通用问题解决者的极限，让它自己思考、自己引导探索，而不是用现成的专业工具直接解题。",
     "source": "Tree-of-Thoughts"
   },
   {
-    "question": "在文档中，构建自一致性基线（CoT-SC）时，具体采用了多少条CoT轨迹进行采样？解码温度设置为多少？最终如何确定答案？",
-    "ground_truth": "构建自一致性基线（CoT-SC）时，采样了21条CoT轨迹，解码温度设置为0.7，最终采用多数答案（majority answer）作为输出。",
-    "source": "ReAct"
-  },
-  {
-    "question": "在PaLM-540B模型上，使用ReAct→CoT-SC方法在HotpotQA数据集上的EM得分是多少？",
-    "ground_truth": "35.1",
-    "source": "ReAct"
-  },
-  {
-    "question": "在AlfWorld的ReAct行为修正示例中，人类通过编辑哪两个思考步骤（Act）来修正轨迹，从而使ReAct轨迹产生理想的推理轨迹并成功完成任务？",
-    "ground_truth": "人类编辑了Act 17和Act 23这两个思考步骤。",
-    "source": "ReAct"
-  },
-  {
-    "question": "在针对HumanEval Rust - 50 hardest problems的消融研究中，省略内部测试生成和执行步骤后，代理的准确率是多少？与基线准确率相比如何？",
-    "ground_truth": "省略内部测试生成和执行步骤后，代理的准确率为52%，低于基线准确率60%。",
+    "question": "代码写错了但编译能发现，为啥修的时候不按提示来？",
+    "ground_truth": "生成和代码编译步骤能够捕获语法和逻辑错误，但实现修复并未反映这些指示。",
     "source": "Reflexion"
   },
   {
-    "question": "在文档引用的文献中，哪一篇论文提出了HotpotQA数据集，并指出该数据集主要用于什么类型的问答任务？",
-    "ground_truth": "文献[28]（Yang, Z.等人，2018）提出了HotpotQA数据集，该数据集主要用于多样化、可解释的多跳问答任务。",
-    "source": "Reflexion"
-  },
-  {
-    "question": "根据文档内容，在工具制造阶段，对于困难任务（如Logical Deduction和Tracking Shuffled Objects），使用GPT-3.5 Turbo作为工具制造者时，其主要失败原因是什么？",
-    "ground_truth": "主要失败原因是工具不够通用，可能只适用于训练样本。",
-    "source": "Voyager"
-  },
-  {
-    "question": "在文档描述的Wikipedia web API中，当用户执行`search[entity]`操作且该实体页面不存在时，API会返回什么内容？",
-    "ground_truth": "如果实体页面不存在，API会返回Wikipedia搜索引擎建议的前5个相似实体。",
-    "source": "ReAct"
-  },
-  {
-    "question": "在ALFWorld的实验中，模型在多少种不同的任务环境中进行了测试？请列举其中至少两种任务类型。",
-    "ground_truth": "模型在134种ALFWorld环境中的六种不同任务上进行了测试。其中两种任务类型包括：寻找隐藏物体（例如在抽屉里找到一把铲子）和移动物体（例如将刀移到切菜板上）。",
-    "source": "Reflexion"
-  },
-  {
-    "question": "根据文档中的`complete_sequence`函数，输入字符串`([[[{}]]{<[<[{}]>]>}`的返回值是什么？请写出具体的输出结果。",
-    "ground_truth": "])",
-    "source": "Voyager"
-  },
-  {
-    "question": "在文档描述的迷你填字游戏任务中，测试集和用于提示（prompting）的游戏分别来自哪些索引？",
-    "ground_truth": "测试集使用索引为1, 6, 11, 16, 21, 26, 31, 36, 41, 46, 51, 56, 61, 66, 71, 76, 81, 86, 91, 96的20个游戏；用于提示的游戏使用索引为136, 141, 146, 151, 156的5个游戏。",
+    "question": "怎么让AI一步步思考复杂问题？",
+    "ground_truth": "使用“从少到多提示”（Least-to-most prompting）方法，可以让大语言模型先解决简单子问题，再逐步处理更复杂的推理任务。",
     "source": "Tree-of-Thoughts"
   }
 ]

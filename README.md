@@ -1,5 +1,7 @@
 # RAG Agent Showcase
 
+[![tests](https://github.com/Joe-rq/rag-agent-showcase/actions/workflows/test.yml/badge.svg)](https://github.com/Joe-rq/rag-agent-showcase/actions/workflows/test.yml)
+
 基于 LangChain 的检索增强生成(RAG)智能体 -- 全链路自实现的独立工程案例: 数据接入、chunking、向量检索、HyDE 进阶检索、Ragas 四指标评估、FastAPI 服务化。
 
 ## 关键设计决策
@@ -20,6 +22,12 @@
                                                             |
 问 question -> [HyDE: LLM 生成假设文档] -> 检索 top-k -> 拼上下文 -> [DeepSeek] -> answer
 ```
+
+## Demo
+
+![playground](docs/playground.png)
+
+`uv run uvicorn app.main:app --port 8000` 后打开 http://localhost:8000/playground 交互问答。
 
 ## 技术栈
 

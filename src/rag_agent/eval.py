@@ -48,11 +48,11 @@ METRICS = [faithfulness, answer_relevancy, context_precision, context_recall]
 METRIC_NAMES = ["faithfulness", "answer_relevancy", "context_precision", "context_recall"]
 
 QA_GEN_PROMPT = ChatPromptTemplate.from_template(
-    "根据以下文档内容, 生成一个需要阅读该文档才能回答的具体问题, 并给出参考答案。\n"
-    "问题要具体、有细节, 不要太宽泛。\n"
+    "根据以下文档内容, 生成一个口语化、简短的提问(像普通用户随口问的, 不要照搬论文术语), 并给出参考答案(答案必须来自文档)。\n"
+    "问题要短、口语化, 和文档的学术表达差异大(例如用日常用语而非论文原话), 这样能测试检索对'非文档式提问'的适应力。\n"
     "严格按格式输出, 不要多余内容:\n"
-    "问题: <问题>\n"
-    "答案: <参考答案>\n\n"
+    "问题: <口语化短问题>\n"
+    "答案: <来自文档的参考答案>\n\n"
     "文档:\n{context}"
 )
 
@@ -159,19 +159,22 @@ def main():
     summary = {}
     for advanced, tag in [("none", "baseline"), ("hyde", "hyde")]:
         print(f"\n[eval] === 跑 {tag} (advanced={advanced}) ===")
-        try:
-            records = run_batch(qa_pairs, advanced)
-            (RESULTS_DIR / f"{tag}_records.json").write_text(
-                json.dumps(records, ensure_ascii=False, indent=2), encoding="utf-8"
-            )
-            print(f"[eval] 评估 {tag} 指标...")
-            scores = eval_batch(records)
-            summary[tag] = scores
-            print(f"[eval] {tag}: {scores}")
-        except Exception as e:
-            # 隔离单个 tag 的失败, 避免把真正的根因(评估/检索失败)掩盖成 KeyError
-            print(f"[eval] {tag} 失败: {type(e).__name__}: {e}")
-            continue
+        for attempt in range(1, 4):
+            try:
+                records = run_batch(qa_pairs, advanced)
+                (RESULTS_DIR / f"{tag}_records.json").write_text(
+                    json.dumps(records, ensure_ascii=False, indent=2), encoding="utf-8"
+                )
+                print(f"[eval] 评估 {tag} 指标...")
+                scores = eval_batch(records)
+                summary[tag] = scores
+                print(f"[eval] {tag}: {scores}")
+                break
+            except Exception as e:
+                # 重试渡过临时网络错误(如 DeepSeek APIConnectionError); 3 次仍败才跳过
+                print(f"[eval] {tag} 第 {attempt}/3 次失败: {type(e).__name__}: {e}")
+                if attempt == 3:
+                    print(f"[eval] {tag} 重试耗尽, 跳过该 tag")
 
     # 3. 对比表(缺某一项时给出明确提示而非抛 KeyError)
     base = summary.get("baseline", {})
