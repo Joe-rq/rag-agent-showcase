@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.ruff_cache/
+.pytest_cache/
+
+# Env
+.env
+
+# Data & indices (论文 PDF 与 FAISS 索引可重新生成, 不入库)
+data/papers/*.pdf
+data/index/
+*.faiss
+*.pkl
+
+# Eval results (大文件, 可重新跑)
+evals/results/*.csv
+evals/results/*.json
+
+# OS
+.DS_Store
+
+# Notebook
+.ipynb_checkpoints/

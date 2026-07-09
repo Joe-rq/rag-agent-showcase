@@ -1,0 +1,64 @@
+# =====================================================================
+# RAG Agent Showcase 配置
+# 模型后端 provider 可选: 42model(本地) | ollama(本地) | cloud(云端 OpenAI 兼容)
+# 切换后端只改 provider 字段; api_key 从 .env 读(LLM_API_KEY / EMBEDDING_CLOUD_API_KEY)
+# =====================================================================
+
+llm:
+  provider: cloud  # cloud | ollama | 42model
+  temperature: 0.0
+  max_tokens: 512
+  providers:
+    cloud:   {base_url: https://api.deepseek.com/v1,   model: deepseek-chat}
+    ollama:  {base_url: http://localhost:11434/v1,     model: qwen2.5:7b}
+    42model: {base_url: http://localhost:11520/v1,     model: minicpm5:1b-q4_k_m}
+
+embedding:
+  provider: 42model  # 42model | ollama | cloud
+  dimensions: 1024
+  providers:
+    42model: {base_url: http://localhost:11520/v1,     model: qwen3-embedding:0.6b-q8_0}
+    ollama:  {base_url: http://localhost:11434/v1,     model: bge-m3}
+    cloud:   {base_url: https://api.siliconflow.cn/v1, model: BAAI/bge-m3}
+
+# ---------------------------------------------------------------------
+# 数据集: AI Agent 论文 (arxiv id 固定, 保证可复现)
+# ---------------------------------------------------------------------
+dataset:
+  papers:
+    - {id: "2210.03629", name: ReAct}
+    - {id: "2303.11366", name: Reflexion}
+    - {id: "2302.04761", name: Toolformer}
+    - {id: "2305.10601", name: Tree-of-Thoughts}
+    - {id: "2305.17126", name: Voyager}
+
+# ---------------------------------------------------------------------
+# chunking 策略: default 为生产配置, variants 用于评估时对比
+#   strategy: recursive(递归字符) | fixed(定长) | markdown(按结构)
+# ---------------------------------------------------------------------
+chunking:
+  default:
+    strategy: recursive
+    chunk_size: 800
+    chunk_overlap: 120
+  variants:
+    - {strategy: fixed,     chunk_size: 800, chunk_overlap: 0}
+    - {strategy: recursive, chunk_size: 800, chunk_overlap: 120}
+    - {strategy: recursive, chunk_size: 500, chunk_overlap: 100}
+
+# ---------------------------------------------------------------------
+# 检索
+#   advanced: none(朴素) | hyde(假设文档嵌入) | rerank(重排)
+# ---------------------------------------------------------------------
+retrieval:
+  top_k: 4
+  advanced: hyde
+
+# ---------------------------------------------------------------------
+# 评估
+#   judge 用 get_llm()(与 generator 同模型), 存在自评偏差, 见 evaluation-report
+# ---------------------------------------------------------------------
+eval:
+  num_questions: 20
+  metrics: [faithfulness, answer_relevancy, context_precision, context_recall]
+  output_dir: evals/results

@@ -1,0 +1,33 @@
+[project]
+name = "rag-agent-showcase"
+version = "0.1.0"
+description = "基于 LangChain 的 RAG 智能体 —— 全链路自实现的独立工程案例"
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "langchain>=0.3",
+    "langchain-core>=0.3",
+    "langchain-community>=0.3",
+    "langchain-openai>=0.2",
+    "langchain-text-splitters>=0.3",
+    "faiss-cpu>=1.9",
+    "ragas>=0.2",
+    "arxiv>=2.1",
+    "pymupdf>=1.24",
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "gradio>=4.0",
+    "python-dotenv>=1.0",
+    "pyyaml>=6.0",
+    "rich>=13.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/rag_agent"]
+
+[dependency-groups]
+dev = ["pytest>=8.0", "ruff>=0.6"]
